@@ -1,20 +1,32 @@
-import React, {Component} from 'react';
+import React from 'react';
+import UpdatedComponent from '../pages/withCounter'
 import './itemList.css';
-export default class ItemList extends Component {
 
-    render() {
-        return (
-            <ul className="item-list list-group">
-                <li className="list-group-item">
-                    John Snow
+const ItemList = (props) => {
+    const renderItems = (arr) => {
+        return arr.map((item, id) => {
+            const label = props.renderItem(item);
+            const url = item.url;
+            const itemId = url.match(/\d/g).join('')
+            return (
+                <li 
+                    key={id}
+                    onClick={ () => props.onItemSelected(itemId) }
+                    className="list-group-item">
+                    {label}
                 </li>
-                <li className="list-group-item">
-                    Brandon Stark
-                </li>
-                <li className="list-group-item">
-                    Geremy
-                </li>
-            </ul>
-        );
+            )
+        })
     }
+
+    const { data } = props;
+    const items = renderItems(data)
+
+    return (
+        <ul className="item-list list-group">
+            {items}
+        </ul>
+    );
 }
+
+export default UpdatedComponent(ItemList)
