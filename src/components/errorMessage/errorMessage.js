@@ -13,7 +13,7 @@ const ImgError = styled.img`
 const ErrorMessage = () => {
     return (
         <>
-            <ImgError src={'/img/error.jpg'}></ImgError>
+            <ImgError data-testid="img-error" src={'/img/error.jpg'}></ImgError>
             <Span> something go wrong</Span>
         </>
     )
